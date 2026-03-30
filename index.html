@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flag Quiz 🌍</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen active">
+    <div class="start-bg-blob"></div>
+    <div class="start-content">
+      <div class="logo-wrap">
+        <span class="logo-icon">🌍</span>
+        <h1 class="logo-title">Flag<span>Quiz</span></h1>
+      </div>
+      <p class="tagline">How well do you know the world's flags?</p>
+
+      <div class="difficulty-section">
+        <p class="section-label">Choose your difficulty</p>
+        <div class="difficulty-btns">
+          <button class="diff-btn active" data-diff="easy">
+            <span class="diff-emoji">🟢</span>
+            <span class="diff-name">Easy</span>
+            <span class="diff-sub">Famous flags</span>
+          </button>
+          <button class="diff-btn" data-diff="medium">
+            <span class="diff-emoji">🟡</span>
+            <span class="diff-name">Medium</span>
+            <span class="diff-sub">Mixed nations</span>
+          </button>
+          <button class="diff-btn" data-diff="hard">
+            <span class="diff-emoji">🔴</span>
+            <span class="diff-name">Hard</span>
+            <span class="diff-sub">Tricky ones</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="start-btn" id="start-btn">
+        Start Quiz <span>→</span>
+      </button>
+
+      <p class="sub-note">10 questions · Timed · No login needed</p>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen" class="screen">
+    <div class="quiz-header">
+      <div class="hud-item">
+        <span class="hud-label">Score</span>
+        <span class="hud-value" id="score-display">0</span>
+      </div>
+      <div class="progress-center">
+        <div class="progress-text" id="progress-text">1 / 10</div>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="progress-bar"></div>
+        </div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Streak</span>
+        <span class="hud-value" id="streak-display">🔥 0</span>
+      </div>
+    </div>
+
+    <div class="timer-ring-wrap">
+      <svg class="timer-ring" viewBox="0 0 80 80">
+        <circle class="ring-bg" cx="40" cy="40" r="34"/>
+        <circle class="ring-fill" id="timer-ring" cx="40" cy="40" r="34"/>
+      </svg>
+      <span class="timer-text" id="timer-text">10</span>
+    </div>
+
+    <div class="flag-card" id="flag-card">
+      <img id="flag-img" src="" alt="Country Flag" />
+    </div>
+
+    <p class="question-text">Which country does this flag belong to?</p>
+
+    <div class="answers-grid" id="answers-grid">
+      <!-- buttons injected by JS -->
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="result-screen" class="screen">
+    <div class="result-content">
+      <div class="result-emoji" id="result-emoji">🏆</div>
+      <h2 class="result-title" id="result-title">Flag Expert!</h2>
+      <div class="result-score-box">
+        <span class="result-score-num" id="result-score">0</span>
+        <span class="result-score-denom">/ 10</span>
+      </div>
+      <p class="result-msg" id="result-msg">You're a geography genius!</p>
+
+      <div class="result-stats">
+        <div class="stat-chip">
+          <span class="stat-label">Best streak</span>
+          <span class="stat-val" id="best-streak-display">0 🔥</span>
+        </div>
+        <div class="stat-chip">
+          <span class="stat-label">Difficulty</span>
+          <span class="stat-val" id="diff-display">Easy</span>
+        </div>
+      </div>
+
+      <button class="share-btn" id="share-btn">📤 Share Score</button>
+      <button class="play-again-btn" id="play-again-btn">🔄 Play Again</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
