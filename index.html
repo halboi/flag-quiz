@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hal's Flag Quiz 🌍</title>
+  <title>Flag Quiz 🌍</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
- 
+
   <!-- ========== START SCREEN ========== -->
   <div id="start-screen" class="screen active">
+    <div class="user-hud" id="user-hud"></div>
     <div class="start-bg-blob"></div>
     <div class="start-content">
       <div class="logo-wrap">
@@ -19,7 +20,7 @@
         <h1 class="logo-title">Flag<span>Quiz</span></h1>
       </div>
       <p class="tagline">How well do you know the world's flags?</p>
- 
+
       <div class="difficulty-section">
         <p class="section-label">Choose your difficulty</p>
         <div class="difficulty-btns">
@@ -40,9 +41,26 @@
           </button>
         </div>
       </div>
- 
+
+      <!-- Answer mode toggle -->
+      <div class="mode-toggle-section">
+        <p class="section-label">Answer mode</p>
+        <div class="mode-toggle-btns">
+          <button class="mode-btn active" data-mode="multiple">
+            <span class="mode-icon">🔘</span>
+            <span class="mode-name">Multiple Choice</span>
+            <span class="mode-sub">Pick from 4 options</span>
+          </button>
+          <button class="mode-btn" data-mode="type">
+            <span class="mode-icon">⌨️</span>
+            <span class="mode-name">Type It</span>
+            <span class="mode-sub">Spell the country</span>
+          </button>
+        </div>
+      </div>
+
       <button class="start-btn" id="start-btn">Start Quiz <span>→</span></button>
- 
+
       <button class="weekly-teaser-btn" id="weekly-teaser-btn">
         <span class="weekly-teaser-icon">🏆</span>
         <div class="weekly-teaser-text">
@@ -51,11 +69,11 @@
         </div>
         <span class="weekly-teaser-arrow">›</span>
       </button>
- 
+
       <p class="sub-note">10 questions · Timed · No login needed</p>
     </div>
   </div>
- 
+
   <!-- ========== QUIZ SCREEN ========== -->
   <div id="quiz-screen" class="screen">
     <div class="quiz-header">
@@ -74,9 +92,9 @@
         <span class="hud-value" id="streak-display">🔥 0</span>
       </div>
     </div>
- 
+
     <div class="weekly-mode-badge" id="weekly-mode-badge">🏆 Weekly Challenge</div>
- 
+
     <div class="timer-ring-wrap">
       <svg class="timer-ring" viewBox="0 0 80 80">
         <circle class="ring-bg" cx="40" cy="40" r="34"/>
@@ -84,22 +102,43 @@
       </svg>
       <span class="timer-text" id="timer-text">10</span>
     </div>
- 
+
     <div class="flag-card" id="flag-card">
       <img id="flag-img" src="" alt="Country Flag" />
     </div>
- 
+
     <p class="question-text">Which country does this flag belong to?</p>
- 
+
     <div class="points-bubble" id="points-bubble"></div>
+
+    <!-- MULTIPLE CHOICE -->
     <div class="answers-grid" id="answers-grid"></div>
- 
+
+    <!-- TYPE MODE -->
+    <div class="type-answer-wrap" id="type-answer-wrap">
+      <div class="type-input-row">
+        <input
+          type="text"
+          id="type-input"
+          class="type-input"
+          placeholder="Type the country name…"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        />
+        <button class="type-submit-btn" id="type-submit-btn">→</button>
+      </div>
+      <div class="type-hint" id="type-hint"></div>
+      <div class="type-feedback" id="type-feedback"></div>
+    </div>
+
     <div class="weekly-points-hud" id="weekly-points-hud">
       <span class="wph-label">⚡ Points</span>
       <span class="wph-value" id="weekly-points-live">0</span>
     </div>
   </div>
- 
+
   <!-- ========== REGULAR RESULT SCREEN ========== -->
   <div id="result-screen" class="screen">
     <div class="result-content">
@@ -110,7 +149,7 @@
         <span class="result-score-denom">/ 10</span>
       </div>
       <p class="result-msg" id="result-msg">You're a geography genius!</p>
- 
+
       <div class="result-stats">
         <div class="stat-chip">
           <span class="stat-label">Best streak</span>
@@ -120,8 +159,12 @@
           <span class="stat-label">Difficulty</span>
           <span class="stat-val" id="diff-display">Easy</span>
         </div>
+        <div class="stat-chip">
+          <span class="stat-label">Mode</span>
+          <span class="stat-val" id="mode-display">Choice</span>
+        </div>
       </div>
- 
+
       <div class="weekly-unlock-banner" id="weekly-unlock-banner">
         <div class="wub-glow"></div>
         <span class="wub-icon">🏆</span>
@@ -130,22 +173,22 @@
           <span>Same flags for everyone this week. Compete for #1!</span>
         </div>
       </div>
- 
+
       <button class="weekly-play-btn" id="weekly-play-btn">⚡ Play Weekly Challenge</button>
       <button class="share-btn" id="share-btn">📤 Share Score</button>
       <button class="play-again-btn" id="play-again-btn">🔄 Play Again</button>
     </div>
   </div>
- 
+
   <!-- ========== WEEKLY RESULT SCREEN ========== -->
   <div id="weekly-result-screen" class="screen">
     <div class="result-content">
       <div class="weekly-week-badge" id="weekly-week-badge">Week #1</div>
       <div class="result-emoji" id="w-result-emoji">🏆</div>
       <h2 class="result-title" id="w-result-title">Top of the World!</h2>
- 
+
       <div class="weekly-score-breakdown" id="weekly-score-breakdown"></div>
- 
+
       <div class="leaderboard-wrap">
         <div class="leaderboard-header">
           <span>🏅 This Week's Leaderboard</span>
@@ -153,16 +196,16 @@
         </div>
         <div class="leaderboard-list" id="leaderboard-list"></div>
       </div>
- 
+
       <div class="weekly-already-played" id="weekly-already-played">
         <span>✅ You've already submitted this week.<br>New challenge resets Monday!</span>
       </div>
- 
+
       <button class="share-btn" id="w-share-btn">📤 Share Weekly Score</button>
       <button class="play-again-btn" id="w-play-again-btn">← Back to Menu</button>
     </div>
   </div>
- 
+
   <!-- ========== NAME ENTRY MODAL ========== -->
   <div class="modal-overlay" id="name-modal">
     <div class="modal-box">
@@ -174,10 +217,12 @@
       <button class="modal-skip-btn" id="modal-skip-btn">Skip</button>
     </div>
   </div>
- 
+
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
- 
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
